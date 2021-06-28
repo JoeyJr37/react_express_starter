@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './customers.css';
 
 class Customers extends Component {
@@ -10,9 +11,8 @@ class Customers extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/customers')
-      .then(res => res.json())
-      .then(customers => this.setState({customers}, () => console.log('Customers fetched...', customers)));
+    axios.get('/api/customers')
+          .then(res => this.setState({ customers: res.data }, () => console.log('Customers fetched...', res.data)));
   }
 
   render() {
